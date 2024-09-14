@@ -3,12 +3,12 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import clsx from "clsx";
-import "izitoast/dist/css/iziToast.min.css";
 import iziToast from "izitoast";
 import { useSelector, useDispatch } from "react-redux";
 import { selectBooking } from "../../redux/campers/selectors";
 import { changeBooking } from "../../redux/campers/slice";
 import { format } from "date-fns";
+import "izitoast/dist/css/iziToast.min.css";
 
 import css from "./BookingForm.module.css";
 
@@ -77,11 +77,12 @@ const BookingForm = ({ camperId }) => {
         comment: "",
       }}
       onSubmit={(values, actions) => handleSubmit(camperId)(values, actions)}
+      validationSchema={validationSchema}
     >
-      {({ setFieldValue, values }) => (
+      {({ setFieldValue, values, errors, touched }) => (
         <Form className={css.formContainer} noValidate>
           <div className={css.formInfo}>
-            <h3>Reserve Your Campervan</h3>
+            <h3>Book your campervan now</h3>
             <p>Stay connected! We are here to assist you.</p>
           </div>
           <div className={css.form}>
@@ -91,12 +92,18 @@ const BookingForm = ({ camperId }) => {
               placeholder="Name*"
               className={css.field}
             />
+            {errors.name && touched.name && (
+              <div className={css.error}>{errors.name}</div>
+            )}
             <Field
               type="email"
               name="email"
               placeholder="Email*"
               className={css.field}
             />
+            {errors.email && touched.email && (
+              <div className={css.error}>{errors.email}</div>
+            )}
             <DatePicker
               selected={values.date}
               onChange={(date) => setFieldValue("date", date)}
@@ -104,7 +111,17 @@ const BookingForm = ({ camperId }) => {
               dateFormat="dd/MM/yyyy"
               className={css.field}
               placeholderText="Booking date*"
+              isClearable
+              showPopperArrow={false}
+              highlightDates={[
+                {
+                  "react-datepicker__day--highlighted-custom-1": [new Date()],
+                },
+              ]}
             />
+            {errors.date && touched.date && (
+              <div className={css.error}>{errors.date}</div>
+            )}
             <Field
               as="textarea"
               name="comment"
@@ -112,7 +129,7 @@ const BookingForm = ({ camperId }) => {
               className={clsx(css.field, css.stretched)}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit">Send</button>
         </Form>
       )}
     </Formik>

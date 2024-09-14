@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import css from "./CamperItem.module.css";
 import sprite from "../../assets/icons.svg";
-import {shortenDescription} from "../../helpers/formatUtils.js";
+import { shortenDescription } from "../../helpers/formatUtils.js";
 import FeatureItemsList from "../FeatureItemsList/FeatureItemsList";
 import RatingLocation from "../RatingLocation/RatingLocation";
 import { switchFavorites } from "../../redux/campers/slice";
@@ -24,7 +24,11 @@ const CamperItem = ({ data }) => {
   return (
     <div className={css.camperItemContainer}>
       <div className={css.imageContainer}>
-        <img src={data.gallery[0].thumb} />
+        {data.gallery && data.gallery.length > 0 ? (
+          <img src={data.gallery[0].thumb} alt={`${data.name} thumbnail`} />
+        ) : (
+          <p>No image available</p>
+        )}
       </div>
       <div className={css.camperItemInfoContainer}>
         <div className={css.header}>
@@ -32,7 +36,7 @@ const CamperItem = ({ data }) => {
             <h2 className={css.headerTitleText}>{data.name}</h2>
             <div className={css.priceLikeContainer}>
               <p className={css.headerTitleText}>
-                &#8364;{data.price.toFixed(2)}
+                &#8364;{typeof data.price === 'number' ? data.price.toFixed(2) : 'N/A'}
               </p>
               <button
                 className={css.invisibleButton}

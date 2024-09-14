@@ -61,3 +61,8 @@
     color: var(--gray);
   }
 }
+
+.error {
+  color: red;
+}
+
