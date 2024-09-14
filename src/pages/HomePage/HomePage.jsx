@@ -10,9 +10,9 @@ const HomePage = () => {
 
   return (
     <main className={css.heroContainer}>
-      <h1 className={css.heroText}>Campers of Your Dreams</h1>
+      <h1 className={css.heroText}>Campers of your dreams</h1>
       <h2 className={css.heroSubtitleText}>
-        Find everything you want in our catalog
+        You can find everything you want in our catalog
       </h2>
       <button className={css.heroBtn} onClick={handleViewNowClick}>
         View Now
