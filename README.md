@@ -2,7 +2,7 @@
 
 <!-- </p> -->
 
-<img src="./src/assets/traveltracks.png" width="1316" alt="Скріншот веб-додатку TravelTrucks">
+<img src="./src/assets/campers.png" width="1259" alt="Скріншот веб-додатку TravelTrucks">
 
 ---
 
